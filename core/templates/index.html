@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Pré-Universitários: Sistema de Cadastro</h1>
+
+    <ul>
+        {% for aluno in alunos %}
+        <li>
+            ID: {{ aluno.id }} | Nome: {{ aluno.nome }} | Email: {{ aluno.email }} | CPF: {{ aluno.cpf }}
+            <a href="{% url 'editar' aluno.id %}">Editar</a>
+            <a href="{% url 'excluir' aluno.id %}">Excluir</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Cadastrar Novo Aluno</h2>
+    <form action="{% url 'salvar' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="nome" placeholder="Digite o seu nome" required>
+        <input type="email" name="email" placeholder="Digite o seu email" required>
+        <input type="number" name="cpf" placeholder="Digite o seu CPF" required>
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>
